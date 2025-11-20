@@ -1,42 +1,208 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  /* やさしい白基調のカラーパレット */
+  --bg-color: #f4f7f6;
+  /* 背景：ごく薄いミントグレー */
+  --card-bg: #ffffff;
+  /* カード：純白 */
+  --text-main: #4a5568;
+  /* 文字：きつい黒ではなく、濃いグレー */
+  --text-sub: #a0aec0;
+  /* サブ文字：薄いグレー */
+
+  /* 状態カラー（パステル調） */
+  --color-stable: #4fd1c5;
+  /* 安定：ソフトなティールグリーン */
+  --color-caution: #f6ad55;
+  /* 注意：やわらかいオレンジ */
+  --color-alert: #fc8181;
+  /* 緊張：きつくないサーモンピンク */
+
+  --primary: #667eea;
+  /* アクセント：落ち着いたインディゴブルー */
+  --shadow-soft: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  /* ふんわりした影 */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+  overflow: hidden;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.container {
+  display: grid;
+  grid-template-rows: 70px 1fr 150px;
+  /* ヘッダーを少し広く */
+  height: 100vh;
+  gap: 20px;
+  padding: 30px;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  padding: 0 30px;
+  border-radius: 20px;
+  /* 角丸を大きく */
+  box-shadow: var(--shadow-soft);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+}
+
+.status-badge {
+  font-family: monospace;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #edf2f7;
+  color: var(--text-main);
+}
+
+/* Main Area */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
 }
 
 .card {
-  padding: 2em;
+  background: var(--card-bg);
+  border-radius: 24px;
+  /* やさしい印象にするため大きく丸める */
+  padding: 30px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #edf2f7;
+  /* 薄い境界線 */
 }
 
-.read-the-docs {
-  color: #888;
+.card-title {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Signal Visualizer */
+.signal-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #f7fafc;
+  /* 真っ黒ではなく、薄いグレーに */
+  border-radius: 16px;
+  padding: 0 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bar {
+  width: 8%;
+  background: var(--primary);
+  /* 落ち着いた青 */
+  bottom: 0;
+  border-radius: 4px;
+  /* バーの角も丸く */
+  transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.8;
+}
+
+/* Gauge Area */
+.gauge-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-display {
+  font-size: 5rem;
+  font-weight: 300;
+  /* 細身のフォントで上品に */
+  font-variant-numeric: tabular-nums;
+}
+
+.state-label {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  padding: 8px 24px;
+  border-radius: 30px;
+  background: #edf2f7;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Footer / Logs */
+.footer {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 20px 30px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #edf2f7;
+}
+
+.log-window {
+  flex: 1;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.log-item {
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.log-time {
+  color: var(--text-sub);
+  margin-right: 15px;
+  font-weight: normal;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 50px;
+  /* 完全な丸ボタン */
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-rec {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-rec:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-stop {
+  background: #cbd5e0;
+  color: var(--text-main);
 }
